@@ -14,12 +14,13 @@ export class  Message {
 @Injectable()
 export class ChatService {
 
-  readonly  token = environment.dialogflow.angularBot;
+  readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
 
 
-  constructor() { }
+  constructor() {
+  }
 
   update(msg: Message) {
     this.conversation.next([msg]);
@@ -49,21 +50,12 @@ export class ChatService {
 
         const botMessage = new Message(speech, 'bot', contentType);
         this.update(botMessage);
-
-       /* if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email'){
-          let resource;
-          let resourceType;
-          if (res.result.contexts[0] === 'await-email') {
-            resource = res.result.contexts[0].parameters.email;
-            resourceType = 'email';
-          }
-          // if (resourceType === 'email') {}
-        }
-      });*/
+      });
   }
-  talk(){
+
+  talk() {
     this.client.textRequest('Who are you?')
       .then(res => console.log(res));
-
-}
   }
+}
+
