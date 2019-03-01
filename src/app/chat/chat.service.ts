@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {mail} from '@sendgrid/mail';
+import * as SendGridMail from '@sendgrid/mail';
 
 
 export class  Message {
@@ -59,7 +59,8 @@ export class ChatService {
           }
           if (resourceType === 'email') {
             // const sgMail = require('@sendgrid/mail');
-            mail.setApiKey('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');
+            SendGridMail.setApiKey('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');
+            // mail.setApiKey('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');
             const emailMsg = {
               to: resource,
               from: 'no-reply@example.com',
@@ -67,7 +68,7 @@ export class ChatService {
               text: speech,
               html: '<strong>and easy to do anywhere, even with Node.js</strong>',
             };
-            mail.send(emailMsg);
+            SendGridMail.send(emailMsg);
           }
         }
       });
