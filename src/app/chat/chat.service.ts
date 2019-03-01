@@ -48,6 +48,27 @@ export class ChatService {
 
         const botMessage = new Message(speech, 'bot', contentType);
         this.update(botMessage);
+
+        if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email'){
+          const resource;
+          const resourceType;
+          if (res.result.contexts[0] === 'await-email') {
+            resource = res.result.contexts[0].parameters.email;
+            resourceType = 'email';
+          }
+          if (resourceType === 'email') {
+            const sgMail = require('@sendgrid/mail');
+            sgMail.setApiKey('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');
+            const emailMsg = {
+              to: resource,
+              from: 'no-reply@example.com',
+              subject: 'Sending with SendGrid is Fun',
+              text: speech,
+              html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            };
+            sgMail.send(emailMsg);
+          }
+        }
       });
   }
   talk() {
