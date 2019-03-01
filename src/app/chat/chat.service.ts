@@ -50,8 +50,8 @@ export class ChatService {
         this.update(botMessage);
 
         if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email'){
-          const resource;
-          const resourceType;
+          let resource;
+          let resourceType;
           if (res.result.contexts[0] === 'await-email') {
             resource = res.result.contexts[0].parameters.email;
             resourceType = 'email';
