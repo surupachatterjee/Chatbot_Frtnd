@@ -32,7 +32,7 @@ export class ChatService {
     return this.client.textRequest(msg)
       .then(res => {
         // console.log(res);
-        // console.log(res.result.fulfillment);
+        console.log(res);
 
         if (res.result.fulfillment.speech !== '') {
           speech = res.result.fulfillment.speech;
