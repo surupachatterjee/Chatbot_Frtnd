@@ -26,7 +26,7 @@ export class ChatService {
   }
 
   converse(msg: string) {
-    const userMessage = new Message(msg, 'user','Text');
+    const userMessage = new Message(msg, 'user', 'Text');
     this.update(userMessage);
     let speech;
     let contentType;
@@ -50,7 +50,7 @@ export class ChatService {
         const botMessage = new Message(speech, 'bot', contentType);
         this.update(botMessage);
 
-        if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email'){
+       /* if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email'){
           let resource;
           let resourceType;
           if (res.result.contexts[0] === 'await-email') {
@@ -59,13 +59,11 @@ export class ChatService {
           }
           // if (resourceType === 'email') {}
         }
-      });
+      });*/
   }
-  talk() {
+  talk(){
     this.client.textRequest('Who are you?')
       .then(res => console.log(res));
 
 }
-
-
-}
+  }
