@@ -5,9 +5,7 @@
                                     'to':   message.sentBy === 'user' }">
     <div *ngIf="message.contentType === 'wellsArray'">
       <ul *ngFor="let well of message.content" class="list-group">
-        <li class="list-group-item">
-          {{well.WellNum}},{{well.FieldName}},{{well.LeaseName}},{{well.CurrentOperatorName}},{{well.County}},{{well.State}},{{well.Country}}
-        </li>
+        <li class="list-group-item">{{well.CurrentOperatorName}}</li>
       </ul>
     </div>
     <div *ngIf="message.contentType === 'Text'">
