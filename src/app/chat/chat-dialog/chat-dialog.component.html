@@ -1,24 +1,22 @@
 <h1>Angular Bot</h1>
 
 <ng-container *ngFor="let message of messages | async">
-
   <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
                                     'to':   message.sentBy === 'user' }">
     <div *ngIf="message.contentType === 'wellsArray'">
       <ul *ngFor="let well of message.content" class="list-group">
-        <li class="list-group-item">{{well.WellNum}}</li>
+        <li class="list-group-item">
+          {{well.WellNum}},{{well.FieldName}},{{well.LeaseName}},{{well.CurrentOperatorName}},{{well.County}},{{well.State}},{{well.Country}}
+        </li>
       </ul>
     </div>
     <div *ngIf="message.contentType === 'Text'">
       {{ message.content}}
     </div>
   </div>
-
 </ng-container>
 
-
 <label for="nameField">Your Message</label>
-
 
 <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
 
