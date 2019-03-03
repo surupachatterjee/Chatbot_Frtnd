@@ -17,8 +17,8 @@ export class ChatService {
   readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
-  mailApiURL = 'https://api.sendgrid.com/v3/mail/send';
-  readonly mailAPIKey = environment.MailAPIKey;
+  mailApiURL = 'https://shrouded-gorge-33384.herokuapp.com/api/wells/email';
+
 
   constructor() {
   }
@@ -66,14 +66,13 @@ export class ChatService {
             fetch(this.mailApiURL,{
               method: 'post',
               headers: {
-                'Content-Type': 'application/json',
-                Authorization: this.mailAPIKey
+                'Content-Type': 'application/json'
               },
               body: {
                 personalizations: [{to: [{email: resource}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
-                content: [{type: 'text/plain', value: 'and easy to do anywhere, even with cURL'}]}
+                content: [{type: 'text/plain', value: speech}]}
             });
           }
         }
