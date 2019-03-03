@@ -59,7 +59,7 @@ export class ChatService {
             resource = res.result.contexts[0].parameters.email;
             resourceType = 'email';
           } else if (res.result.contexts[0].name === 'await-phone') {
-            resource = res.result.contexts[0].parameters.phone;
+            resource = res.result.contexts[0].parameters['phone-number'];
             resourceType = 'phone';
           }
           if (resourceType === 'email') {
@@ -92,7 +92,6 @@ export class ChatService {
             }).then(resp => console.log(resp));
           }
         }
-
       });
   }
 
