@@ -68,14 +68,14 @@ export class ChatService {
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: {
+              body: JSON.stringify({
                 personalizations: [{to: [{email: 'chatterjee.surupa63@gmail.com'}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
                 content: [{type: 'text/plain', value: 'Here is a test msg'}]
-              }
+              })
             };
-            fetch(this.mailApiURL, JSON.stringify(reqBody));
+            fetch(this.mailApiURL, reqBody);
           }
         }
 
