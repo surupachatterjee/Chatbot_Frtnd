@@ -52,13 +52,13 @@ export class ChatService {
         const botMessage = new Message(speech, 'bot', contentType);
         this.update(botMessage);
 
-        if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email') {
+        if (res.result.contexts[0].name === 'await-phone' || res.result.contexts[0].name === 'await-email') {
           let resource;
           let resourceType;
-          if (res.result.contexts[0] === 'await-email') {
+          if (res.result.contexts[0].name === 'await-email') {
             resource = res.result.contexts[0].parameters.email;
             resourceType = 'email';
-          } else if (res.result.contexts[0] === 'await-phone') {
+          } else if (res.result.contexts[0].name === 'await-phone') {
             resource = res.result.contexts[0].parameters.phone;
             resourceType = 'phone';
           }
