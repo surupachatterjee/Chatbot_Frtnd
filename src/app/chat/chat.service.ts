@@ -92,7 +92,7 @@ export class ChatService {
                 personalizations: [{to: [{email: resource}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
-                content: [{type: 'text/plain', value: reqMessage}]
+                content: [{type: 'text/html', value: reqMessage}]
               })
             };
             console.log(reqBody);
