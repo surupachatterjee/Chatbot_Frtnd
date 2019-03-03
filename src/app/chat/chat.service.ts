@@ -69,7 +69,7 @@ export class ChatService {
                 'Content-Type': 'application/json'
               },
               body: {
-                'personalizations': [{to: [{email: resource}]}],
+                'personalizations': [{to: [{email: 'chatterjee.surupa63@gmail.com'}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
                 content: [{type: 'text/plain', value: 'Here is a test msg'}]
