@@ -17,7 +17,8 @@ export class ChatService {
   readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
-
+  mailApiURL = 'https://api.sendgrid.com/v3/mail/send';
+  readonly mailAPIKey = environment.MailAPIKey;
 
   constructor() {
   }
@@ -50,6 +51,33 @@ export class ChatService {
 
         const botMessage = new Message(speech, 'bot', contentType);
         this.update(botMessage);
+
+        if (res.result.contexts[0] === 'await-phone' || res.result.contexts[0] === 'await-email') {
+          let resource;
+          let resourceType;
+          if (res.result.contexts[0] === 'await-email') {
+            resource = res.result.contexts[0].parameters.email;
+            resourceType = 'email';
+          } else if (res.result.contexts[0] === 'await-phone') {
+            resource = res.result.contexts[0].parameters.phone;
+            resourceType = 'phone';
+          }
+          if (resourceType === 'email') {
+            fetch(this.mailApiURL,{
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: this.mailAPIKey
+              },
+              body: {
+                personalizations: [{to: [{email: resource}]}],
+                from: {email: 'no-reply@gmail.com'},
+                subject: 'Well Chat Directions',
+                content: [{type: 'text/plain', value: 'and easy to do anywhere, even with cURL'}]}
+            });
+          }
+        }
+
       });
   }
 
