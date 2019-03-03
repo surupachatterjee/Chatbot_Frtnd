@@ -67,7 +67,7 @@ export class ChatService {
             const messages = this.conversation.getValue();
             for (let message in messages) {
               if (message[contentType] === 'wellsArray') {
-                reqMessageWells = message.content;
+                reqMessageWells = message['content'];
               }
             }
             let reqMessage ;
