@@ -98,16 +98,30 @@ export class ChatService {
           }
 
           if (resourceType === 'phone') {
-            fetch(this.mailApiURL + 'sms', {
-              method: 'post',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                message: 'This is test message from well chatbot',
-                to: resource
-              })
-            }).then(resp => console.log(resp));
+            let reqMessage ;
+            let wellCount = 0;
+            if (this.wellsArrayMsg !== null) {
+              for (let well of this.wellsArrayMsg) {
+                wellCount += 1;
+                reqMessage = '<a href=\'https://www.google.com/maps/dir/?api=1&destination='
+                + well.SurfaceLatitude + ',' + well.SurfaceLongitude + '\'>Well# ' + well.WellNum
+                + ', ' + well.LeaseName + ', ' + well.CurrentOperatorName + ', ' + well.CurrentOperatorCity
+                + ', ' + well.County + ', ' + well.State + ', ' + well.Country + '</a>';
+              }
+              fetch(this.mailApiURL + 'sms', {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  message: reqMessage,
+                  to: resource
+                })
+              }).then(resp => console.log(resp));
+              if (wellCount >= 2) {
+                break;
+              }
+            }
           }
         }
       });
