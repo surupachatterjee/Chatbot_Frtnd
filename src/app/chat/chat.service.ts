@@ -64,7 +64,7 @@ export class ChatService {
           }
           if (resourceType === 'email') {
             let reqMessageWells;
-            for (message in this.conversation.getValue()){
+            for (const message in this.conversation.getValue()){
               if (message.contentType === 'wellsArray') {
                 reqMessageWells = message.content;
               }
@@ -72,13 +72,13 @@ export class ChatService {
             let reqMessage ;
             if (reqMessageWells !== '') {
               reqMessage = '<ul>';
-              for (well in reqMessageWells) {
-                reqMessage = '<li ><a href="https://www.google.com/maps/dir/?api=1&destination='
+              for (const well of reqMessageWells) {
+                reqMessage = reqMessage + '<li ><a href="https://www.google.com/maps/dir/?api=1&destination='
                   + well.SurfaceLatitude + ',' + well.SurfaceLongitude + '">Well# ' + well.WellNum
                   + ', ' + well.LeaseName + ', ' + well.CurrentOperatorName + ', ' + well.CurrentOperatorCity
                   + ', ' + well.County + ', ' + well.State + ', ' + well.Country + '</a></li>';
               }
-              reqMessage = '</ul>';
+              reqMessage = reqMessage + '</ul>';
             } else {
               reqMessage = 'No Wells information extracted';
             }
