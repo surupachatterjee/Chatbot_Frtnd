@@ -119,7 +119,7 @@ export class ChatService {
                 })
               }).then(resp => console.log(resp));
               if (wellCount >= 2) {
-                break;
+                return;
               }
             }
           }
