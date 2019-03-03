@@ -18,7 +18,7 @@ export class ChatService {
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
   mailApiURL = 'https://shrouded-gorge-33384.herokuapp.com/api/wells/';
-
+  wellsArrayMsg = {};
 
   constructor() {
   }
@@ -42,6 +42,7 @@ export class ChatService {
           contentType = 'Text';
         } else {
           speech = res.result.fulfillment.messages[0].payload.wells;
+          this.wellsArrayMsg = res.result.fulfillment.messages[0].payload.wells;
           contentType = 'wellsArray';
           // console.log(speech);
         }
@@ -64,18 +65,12 @@ export class ChatService {
           }
           console.log(resource + ' ' + resourceType);
           if (resourceType === 'email') {
-            let reqMessageWells;
-            const messages = this.conversation.getValue();
-            for (let message of messages) {
-              console.log(message[contentType] + ' ' + message['content']);
-              if (message[contentType] === 'wellsArray') {
-                reqMessageWells = message['content'];
-              }
-            }
             let reqMessage ;
-            if (reqMessageWells !== null) {
+            let reqMessageType ;
+            if (this.wellsArrayMsg !== null) {
+              reqMessageType = 'text/html' ;
               reqMessage = '<ul>';
-              for (let well of reqMessageWells) {
+              for (let well of this.wellsArrayMsg) {
                 reqMessage = reqMessage + '<li ><a href="https://www.google.com/maps/dir/?api=1&destination='
                   + well.SurfaceLatitude + ',' + well.SurfaceLongitude + '">Well# ' + well.WellNum
                   + ', ' + well.LeaseName + ', ' + well.CurrentOperatorName + ', ' + well.CurrentOperatorCity
@@ -84,6 +79,7 @@ export class ChatService {
               reqMessage = reqMessage + '</ul>';
             } else {
               reqMessage = 'No Wells information extracted';
+              reqMessageType = 'text/plain';
             }
             const reqBody = {
               method: 'post',
@@ -94,7 +90,7 @@ export class ChatService {
                 personalizations: [{to: [{email: resource}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
-                content: [{type: 'text/html', value: reqMessage}]
+                content: [{type: reqMessageType, value: reqMessage}]
               })
             };
             console.log(reqBody);
