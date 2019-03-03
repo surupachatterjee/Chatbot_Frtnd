@@ -18,7 +18,7 @@ export class ChatService {
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
   mailApiURL = 'https://shrouded-gorge-33384.herokuapp.com/api/wells/';
-  wellsArrayMsg = {};
+  wellsArrayMsg = [];
 
   constructor() {
   }
