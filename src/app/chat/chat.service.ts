@@ -75,7 +75,8 @@ export class ChatService {
                 content: [{type: 'text/plain', value: 'Here is a test msg'}]
               })
             };
-            fetch(this.mailApiURL, reqBody);
+            console.log(reqBody);
+            fetch(this.mailApiURL, reqBody).then(resp => console.log(resp) );
           }
         }
 
