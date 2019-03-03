@@ -7,7 +7,8 @@
       <ul *ngFor="let well of message.content" class="list-group">
         <li class="list-group-item">
           <a href="https://www.google.com/maps/dir/?api=1&destination={{well.SurfaceLatitude}},{{well.SurfaceLongitude}}">
-          {{well.CurrentOperatorName}}, {{well.LeaseName}}
+          Well# {{well.WellNum}}, {{well.LeaseName}}, {{well.CurrentOperatorName}},
+            {{well.CurrentOperatorCity}}, {{well.County}}, {{well.State}}, {{well.Country}}
           </a>
         </li>
       </ul>
