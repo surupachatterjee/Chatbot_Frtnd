@@ -5,7 +5,11 @@
                                     'to':   message.sentBy === 'user' }">
     <div *ngIf="message.contentType === 'wellsArray'">
       <ul *ngFor="let well of message.content" class="list-group">
-        <li class="list-group-item">{{well.CurrentOperatorName}},{{well.LeaseName}}</li>
+        <li class="list-group-item">
+          <a href="https://www.google.com/maps/dir/?api=1&destination="{{well.SurfaceLatitude}},{{well.SurfaceLongitude}}>
+          {{well.CurrentOperatorName}}, {{well.LeaseName}}
+          </a>
+        </li>
       </ul>
     </div>
     <div *ngIf="message.contentType === 'Text'">
