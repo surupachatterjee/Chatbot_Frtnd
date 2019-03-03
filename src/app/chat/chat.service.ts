@@ -71,8 +71,8 @@ export class ChatService {
               reqMessageType = 'text/html' ;
               reqMessage = '<ul>';
               for (let well of this.wellsArrayMsg) {
-                reqMessage = reqMessage + '<li ><a href="https://www.google.com/maps/dir/?api=1&destination='
-                  + well.SurfaceLatitude + ',' + well.SurfaceLongitude + '">Well# ' + well.WellNum
+                reqMessage = reqMessage + '<li ><a href=\'https://www.google.com/maps/dir/?api=1&destination='
+                  + well.SurfaceLatitude + ',' + well.SurfaceLongitude + '\'>Well# ' + well.WellNum
                   + ', ' + well.LeaseName + ', ' + well.CurrentOperatorName + ', ' + well.CurrentOperatorCity
                   + ', ' + well.County + ', ' + well.State + ', ' + well.Country + '</a></li>';
               }
