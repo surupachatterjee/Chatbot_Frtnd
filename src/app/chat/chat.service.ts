@@ -43,7 +43,7 @@ export class ChatService {
         } else {
           speech = res.result.fulfillment.messages[0].payload.wells;
           contentType = 'wellsArray';
-          console.log(speech);
+          // console.log(speech);
         }
         // console.log(speech[0].payload);
         // const wellarray = speech[0].payload.wells;
@@ -62,10 +62,12 @@ export class ChatService {
             resource = res.result.contexts[0].parameters['phone-number'];
             resourceType = 'phone';
           }
+          console.log(resource + ' ' + resourceType);
           if (resourceType === 'email') {
             let reqMessageWells;
             const messages = this.conversation.getValue();
-            for (let message in messages) {
+            for (let message of messages) {
+              console.log(message[contentType] + ' ' + message['content']);
               if (message[contentType] === 'wellsArray') {
                 reqMessageWells = message['content'];
               }
