@@ -66,12 +66,12 @@ export class ChatService {
             let reqMessageWells;
             const messages = this.conversation.getValue();
             for (let message in messages) {
-              if (message.contentType === 'wellsArray') {
-                reqMessageWells = message.content;
+              if (message[contentType] === 'wellsArray') {
+                reqMessageWells = message[content];
               }
             }
             let reqMessage ;
-            if (reqMessageWells !== '') {
+            if (reqMessageWells !== null) {
               reqMessage = '<ul>';
               for (let well of reqMessageWells) {
                 reqMessage = reqMessage + '<li ><a href="https://www.google.com/maps/dir/?api=1&destination='
