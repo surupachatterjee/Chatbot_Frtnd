@@ -72,7 +72,7 @@ export class ChatService {
                 'personalizations': [{to: [{email: resource}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
-                content: [{type: 'text/plain', value: speech}]
+                content: [{type: 'text/plain', value: 'Here is a test msg'}]
               }
             });
           }
