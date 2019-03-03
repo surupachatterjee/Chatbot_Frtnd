@@ -69,10 +69,11 @@ export class ChatService {
                 'Content-Type': 'application/json'
               },
               body: {
-                personalizations: [{to: [{email: resource}]}],
+                'personalizations': [{to: [{email: resource}]}],
                 from: {email: 'no-reply@gmail.com'},
                 subject: 'Well Chat Directions',
-                content: [{type: 'text/plain', value: speech}]}
+                content: [{type: 'text/plain', value: speech}]
+              }
             });
           }
         }
