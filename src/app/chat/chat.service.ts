@@ -17,7 +17,7 @@ export class ChatService {
   readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
-  mailApiURL = 'https://shrouded-gorge-33384.herokuapp.com/api/wells/email';
+  mailApiURL = 'https://shrouded-gorge-33384.herokuapp.com/api/wells/';
 
 
   constructor() {
@@ -76,7 +76,20 @@ export class ChatService {
               })
             };
             console.log(reqBody);
-            fetch(this.mailApiURL, reqBody).then(resp => console.log(resp) );
+            fetch(this.mailApiURL + 'email', reqBody).then(resp => console.log(resp) );
+          }
+
+          if (resourceType === 'phone') {
+            fetch(this.mailApiURL + 'sms', {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                message: 'This is test message from well chatbot',
+                to: resource
+              })
+            }).then(resp => console.log(resp));
           }
         }
 
